@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Germany Growth Desk</title>
+  <rect width="64" height="64" rx="12" fill="#101B24"/>
+  <path d="M43 22a17 17 0 1 0 0 20" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M34 34h16v12" fill="none" stroke="#E4572E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="50" cy="46" r="4" fill="#E4572E"/>
+</svg>
