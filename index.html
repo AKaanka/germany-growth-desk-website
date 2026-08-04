@@ -108,6 +108,8 @@ header.nav{
 .proof div:first-child{border-left:0;padding-left:0}
 .proof b{font-family:'Archivo',sans-serif;font-size:26px;font-weight:700;display:block;color:#fff}
 .proof span{font-size:13.5px;color:#8FA1AC}
+.proof-note{padding:15px 0 22px;border-top:1px solid #2A3B47;color:#AFC0C9;font-size:13px}
+.proof-note::before{content:"";display:inline-block;width:22px;height:1px;background:var(--signal);margin:0 10px 4px 0}
 @media(max-width:720px){
   .proof{grid-template-columns:1fr}
   .proof div{border-left:0;border-top:1px solid #2A3B47;padding-left:0}
@@ -139,6 +141,12 @@ section h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;max-width:22ch;overf
 .stop h3{font-size:17px;font-weight:700;margin-bottom:8px}
 .stop h3{overflow-wrap:anywhere}
 .stop p{font-size:14px;color:var(--muted);line-height:1.55}
+.deliverables{margin-top:52px;padding:28px;border:1px solid var(--line);background:var(--paper);border-radius:4px}
+.deliverables h3{font-size:19px;margin-bottom:6px}
+.deliverables>p{font-size:14.5px;color:var(--muted)}
+.deliverables ul{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);list-style:none;margin-top:22px;border:1px solid var(--line)}
+.deliverables li{background:var(--white);padding:18px 16px 18px 38px;font-size:14px;position:relative}
+.deliverables li::before{content:"";position:absolute;left:17px;top:24px;width:9px;height:9px;border-left:2px solid var(--signal);border-bottom:2px solid var(--signal);transform:rotate(-45deg) scale(.8)}
 @media(max-width:860px){
   .route{grid-template-columns:1fr;gap:28px}
   .route::before{display:none}
@@ -147,7 +155,9 @@ section h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;max-width:22ch;overf
   .stop .num{grid-column:2}
   .stop h3{grid-column:2}
   .stop p{grid-column:2}
+  .deliverables ul{grid-template-columns:1fr 1fr}
 }
+@media(max-width:560px){.deliverables{padding:22px 18px}.deliverables ul{grid-template-columns:1fr}}
 
 /* services */
 .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
@@ -158,32 +168,13 @@ section h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;max-width:22ch;overf
 .svc .ref{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--signal);text-transform:uppercase;margin-bottom:16px}
 .svc h3{font-size:22px;font-weight:700;margin-bottom:6px}
 .svc h3{overflow-wrap:anywhere}
-.svc .price{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--muted);margin-bottom:18px}
-.svc.featured .price{color:#9FB4BF}
 .svc p.desc{font-size:15px;color:var(--muted);margin-bottom:18px}
 .svc.featured p.desc{color:#C4CFD6}
 .svc ul{list-style:none;margin-top:auto}
 .svc li{font-size:14.5px;padding:9px 0 9px 24px;border-top:1px solid var(--line);position:relative;color:var(--ink)}
 .svc.featured li{border-color:#284450;color:#DCE4E8}
 .svc li::before{content:"";position:absolute;left:2px;top:16px;width:10px;height:10px;border-left:2px solid var(--signal);border-bottom:2px solid var(--signal);transform:rotate(-45deg) scale(.85)}
-.svc .badge{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;background:var(--signal);color:#fff;padding:4px 9px;border-radius:3px;margin-left:10px;vertical-align:middle;text-transform:uppercase}
 @media(max-width:820px){.svc-grid{grid-template-columns:1fr}}
-
-/* fair band */
-.fair{background:var(--steel);color:#fff}
-.fair .eyebrow{color:#FFB59C}
-.fair .eyebrow::before{background:#FFB59C}
-.fair h2{color:#fff}
-.fair .sec-head p{color:#C9D8E0}
-.fair-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#2E5D7C;border:1px solid #2E5D7C;margin-top:10px}
-.fair-cols article{background:var(--steel);padding:28px 26px}
-.fair-cols .ph{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#FFB59C;display:block;margin-bottom:14px}
-.fair-cols h3{font-size:18px;margin-bottom:12px}
-.fair-cols li{font-size:14.5px;color:#D5E1E8;list-style:none;padding:6px 0 6px 18px;position:relative}
-.fair-cols li::before{content:"—";position:absolute;left:0;color:#FFB59C}
-.fair-note{margin-top:34px;padding:22px 26px;border:1px dashed #5B87A3;font-size:15.5px;color:#EAF1F5;max-width:70ch}
-.fair-note b{color:#fff}
-@media(max-width:820px){.fair-cols{grid-template-columns:1fr}}
 
 /* who */
 .who-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
@@ -197,14 +188,6 @@ section h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;max-width:22ch;overf
 .fit-title{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin:26px 0 12px}
 @media(max-width:820px){.who-grid{grid-template-columns:1fr}}
 
-/* secondary market direction */
-.secondary-market{padding:64px 0;background:#E4E9EB;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.secondary-market .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
-.secondary-market .wrap>*{min-width:0}
-.secondary-market h2{font-size:clamp(25px,3vw,34px);max-width:19ch}
-.secondary-market p{color:var(--muted);max-width:65ch}
-@media(max-width:820px){.secondary-market .wrap{grid-template-columns:1fr;gap:20px}}
-
 /* why */
 .why{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .why-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
@@ -212,6 +195,8 @@ section h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;max-width:22ch;overf
 .why .name{font-family:'Archivo',sans-serif;font-size:24px;font-weight:800;margin-bottom:4px}
 .why .role{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--muted);letter-spacing:.06em;margin-bottom:20px}
 .why p.bio{color:var(--muted);font-size:15.5px;margin-bottom:14px}
+.linkedin-link{display:inline-flex;align-items:center;gap:9px;margin-top:10px;padding:10px 14px;border:1px solid var(--steel);border-radius:4px;color:var(--steel-deep);font-family:'IBM Plex Mono',monospace;font-size:12px;text-decoration:none}
+.linkedin-link::before{content:"in";display:inline-grid;place-items:center;width:20px;height:20px;background:var(--steel);color:#fff;border-radius:2px;font-family:'Archivo',sans-serif;font-weight:800;font-size:12px}
 .diff{list-style:none}
 .diff li{padding:16px 0 16px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:baseline}
 .diff li:first-child{border-top:0}
@@ -221,18 +206,49 @@ section h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;max-width:22ch;overf
 .diff span{font-size:14px;color:var(--muted)}
 @media(max-width:820px){.why-grid{grid-template-columns:1fr}}
 
-/* cta */
+/* contact */
 .cta{background:var(--ink);color:#fff;text-align:left}
 .cta h2{color:#fff;max-width:20ch}
 .cta p{color:#C4CFD6;max-width:56ch;margin-top:16px}
-.cta .hero-cta{margin-top:32px}
 .cta .mail{font-family:'IBM Plex Mono',monospace;font-size:14px;color:#8FA1AC;margin-top:26px;display:block}
 .cta .mail a{color:#fff;text-decoration-color:var(--signal)}
+.contact-layout{display:grid;grid-template-columns:.78fr 1.22fr;gap:56px;align-items:start}
+.contact-form{background:#16232E;border:1px solid #2A3B47;border-radius:5px;padding:30px}
+.required-note{font-size:13px!important;margin:0 0 22px!important;color:#8FA1AC!important}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form-field{min-width:0}
+.form-field.full{grid-column:1/-1}
+.form-field label,.consent label{display:block;color:#EAF1F5;font-size:13.5px;font-weight:600;margin-bottom:7px}
+.required-mark{color:#FF8A65}
+.form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid #526572;background:#101B24;color:#fff;border-radius:4px;padding:12px 13px;font:inherit;font-size:15px;line-height:1.4}
+.form-field select{appearance:auto}
+.form-field textarea{min-height:116px;resize:vertical}
+.form-field input::placeholder,.form-field textarea::placeholder{color:#7F929D;opacity:1}
+.form-field input:hover,.form-field select:hover,.form-field textarea:hover{border-color:#8296A2}
+.form-field [aria-invalid="true"]{border-color:#FF8A65}
+.field-error{display:none;color:#FFB59C;font-size:12.5px;margin-top:6px}
+.field-error.visible{display:block}
+.consent{display:grid;grid-template-columns:20px 1fr;gap:10px;margin-top:22px;align-items:start}
+.consent input{width:18px;height:18px;margin-top:3px;accent-color:var(--signal)}
+.consent label{font-weight:400;margin:0;color:#C4CFD6;line-height:1.5}
+.consent a{color:#fff;text-decoration-color:var(--signal)}
+.form-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:24px}
+.contact-form button{cursor:pointer}
+.contact-form button:disabled{cursor:wait;opacity:.7;transform:none}
+.form-status{font-size:14px!important;margin:0!important;min-height:22px;color:#C4CFD6!important}
+.form-status.success{color:#8ED1A4!important}
+.form-status.error{color:#FFB59C!important}
+.hp-field{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+@media(max-width:860px){.contact-layout{grid-template-columns:1fr;gap:36px}}
+@media(max-width:620px){.contact-form{padding:24px 18px}.form-grid{grid-template-columns:1fr}.form-field.full{grid-column:auto}}
 
 /* footer */
 footer{background:var(--ink);color:#6E8290;border-top:1px solid #2A3B47;padding:26px 0;font-size:13px}
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 footer .mono{letter-spacing:.08em}
+.footer-copy{display:flex;gap:12px 22px;flex-wrap:wrap;justify-content:flex-end}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links a{color:#AFC0C9;text-underline-offset:3px}
 
 /* reveal animation */
 .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
@@ -242,8 +258,6 @@ footer .mono{letter-spacing:.08em}
 /* additions for repositioned site */
 .callout{margin-top:34px;padding:22px 26px;border:1px dashed var(--steel);background:var(--white);font-size:16px;max-width:72ch}
 .callout b{color:var(--steel-deep)}
-.svc-grid .svc.wide{grid-column:1/-1}
-@media(max-width:820px){.svc-grid .svc.wide{grid-column:auto}}
 .solution{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .sol-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
 .sol-list{list-style:none;background:var(--paper);border:1px solid var(--line);padding:8px 26px;border-radius:4px}
@@ -272,7 +286,7 @@ footer .mono{letter-spacing:.08em}
       <button type="button" data-lang="de">DE</button>
       <button type="button" data-lang="tr">TR</button>
     </div>
-    <a class="btn btn-signal btn-nav" href="#contact" data-i18n="nav_cta">Book a call</a>
+    <a class="btn btn-signal btn-nav" href="#contact" data-i18n="nav_cta">Contact</a>
   </div>
 </header>
 
@@ -284,7 +298,7 @@ footer .mono{letter-spacing:.08em}
     <p class="supporting" data-i18n="hero_supporting">Based in Berlin, Germany Growth Desk serves as your external, on-the-ground business development partner, helping you build professional customer relationships.</p>
     <div class="hero-cta">
       <a class="btn btn-signal" href="#services" data-i18n="hero_cta1">Develop the German market</a>
-      <a class="btn btn-ghost" href="#contact" data-i18n="hero_cta2">Book a discovery call</a>
+      <a class="btn btn-ghost" href="#contact" data-i18n="hero_cta2">Contact us</a>
     </div>
     <div class="corridor">
       <div class="corridor-line">
@@ -294,10 +308,11 @@ footer .mono{letter-spacing:.08em}
       </div>
     </div>
     <div class="proof">
-      <div><b>13</b><span data-i18n="proof_1">new German accounts opened in 7 months</span></div>
-      <div><b>€750K</b><span data-i18n="proof_2">export revenue generated in industrial B2B sales</span></div>
+      <div><b>13</b><span data-i18n="proof_1">new German accounts won in a previous professional role in 7 months</span></div>
+      <div><b>€750K</b><span data-i18n="proof_2">industrial B2B revenue contributed to in a previous professional role</span></div>
       <div><b>BERLIN</b><span data-i18n="proof_3">based in Germany and available for customer visits nationwide</span></div>
     </div>
+    <p class="proof-note" data-i18n="proof_note">Results from the founder's previous professional experience.</p>
   </div>
 </section>
 
@@ -363,18 +378,18 @@ footer .mono{letter-spacing:.08em}
     <div class="svc-grid rv">
       <article class="svc featured">
         <span class="ref">GGD-01</span>
-        <h3><span data-i18n="svc1_h">Customer Visits &amp; Meetings in Germany</span></h3>
-        <p class="desc" data-i18n="svc1_p">We visit potential buyers, existing customers, distributors, and business partners on your behalf or together with your team — so every important conversation does not require another flight to Germany.</p>
+        <h3><span data-i18n="svc1_h">Customer Visits &amp; Meetings</span></h3>
+        <p class="desc" data-i18n="svc1_p">We prepare and conduct focused visits with potential buyers, existing customers, distributors, and business partners on your behalf or together with your team.</p>
         <ul>
-          <li data-i18n="svc1_l1">Introductory meetings and customer relationship visits</li>
-          <li data-i18n="svc1_l2">Professional presentation of your company, products, and capabilities</li>
-          <li data-i18n="svc1_l3">Commercial feedback and meeting reports after every visit</li>
+          <li data-i18n="svc1_l1">Prioritized companies and meeting objectives prepared before each visit</li>
+          <li data-i18n="svc1_l2">Introductory meetings and relationship-development visits</li>
+          <li data-i18n="svc1_l3">Professional presentation, commercial feedback, and visit reports</li>
           <li data-i18n="svc1_l4">Structured follow-up and coordination of next steps</li>
         </ul>
       </article>
       <article class="svc priority">
         <span class="ref">GGD-02</span>
-        <h3 data-i18n="svc2_h">Trade Fair Attendance &amp; Representation</h3>
+        <h3 data-i18n="svc2_h">Trade Fair Representation</h3>
         <p class="desc" data-i18n="svc2_p">We attend relevant German trade fairs for you, visit target exhibitors and buyers, introduce your capabilities, and create a structured follow-up plan — even when you do not exhibit or travel.</p>
         <ul>
           <li data-i18n="svc2_l1">Target-company lists and meetings prepared before the event</li>
@@ -385,46 +400,24 @@ footer .mono{letter-spacing:.08em}
       </article>
       <article class="svc">
         <span class="ref">GGD-03</span>
-        <h3 data-i18n="svc3_h">Local Business Representation</h3>
-        <p class="desc" data-i18n="svc3_p">We provide a flexible external business development presence for manufacturers that are not yet ready for a German office or full-time local sales hire.</p>
+        <h3 data-i18n="svc3_h">Sales Development &amp; Customer Acquisition</h3>
+        <p class="desc" data-i18n="svc3_p">We identify and qualify German buyers, importers, distributors, and partners, then turn the best-fit accounts into active commercial conversations.</p>
         <ul>
-          <li data-i18n="svc3_l1">Local contact for agreed commercial activities</li>
-          <li data-i18n="svc3_l2">Customer communication and product-information coordination</li>
-          <li data-i18n="svc3_l3">Meeting attendance, visit support, and relationship development</li>
-          <li data-i18n="svc3_l4">Ongoing reporting with clear boundaries and responsibilities</li>
+          <li data-i18n="svc3_l1">Buyer, importer, wholesaler, and distributor mapping</li>
+          <li data-i18n="svc3_l2">Target-account and decision-maker prioritization</li>
+          <li data-i18n="svc3_l3">Personalized outreach, meeting arrangement, and local sales support</li>
+          <li data-i18n="svc3_l4">CRM tracking, market feedback, and consistent opportunity follow-up</li>
         </ul>
       </article>
       <article class="svc">
         <span class="ref">GGD-04</span>
-        <h3 data-i18n="svc4_h">B2B Sales Development &amp; Customer Acquisition</h3>
-        <p class="desc" data-i18n="svc4_p">We turn target accounts into active commercial conversations through decision-maker outreach, meeting coordination, local visits, and disciplined follow-up.</p>
+        <h3 data-i18n="svc4_h">Local Market Representation</h3>
+        <p class="desc" data-i18n="svc4_p">We provide a flexible external presence for manufacturers that need grounded market-entry execution before opening a German office or making a full-time local hire.</p>
         <ul>
-          <li data-i18n="svc4_l1">Target-account and decision-maker prioritization</li>
-          <li data-i18n="svc4_l2">Personalized B2B outreach and meeting arrangement</li>
-          <li data-i18n="svc4_l3">Sales conversations supported in the German market</li>
-          <li data-i18n="svc4_l4">CRM tracking and consistent opportunity follow-up</li>
-        </ul>
-      </article>
-      <article class="svc">
-        <span class="ref">GGD-05</span>
-        <h3 data-i18n="svc5_h">Buyer &amp; Distributor Search</h3>
-        <p class="desc" data-i18n="svc5_p">We identify and qualify the German buyers, importers, wholesalers, distributors, and business partners that best fit your offer.</p>
-        <ul>
-          <li data-i18n="svc5_l1">Buyer, importer, wholesaler, and distributor mapping</li>
-          <li data-i18n="svc5_l2">Research focused on actionable target companies</li>
-          <li data-i18n="svc5_l3">Prioritization based on fit and real market feedback</li>
-          <li data-i18n="svc5_l4">Introductions and outreach prepared for decision-makers</li>
-        </ul>
-      </article>
-      <article class="svc">
-        <span class="ref">GGD-06</span>
-        <h3 data-i18n="svc6_h">German Market Entry Support</h3>
-        <p class="desc" data-i18n="svc6_p">We combine practical market research with customer conversations, visits, fairs, and ongoing execution to build a grounded entry plan.</p>
-        <ul>
-          <li data-i18n="svc6_l1">Market and competitor context for commercial decisions</li>
-          <li data-i18n="svc6_l2">Entry priorities tested through real conversations</li>
-          <li data-i18n="svc6_l3">Feedback loops between the market and your team</li>
-          <li data-i18n="svc6_l4">Flexible monthly business development support from Berlin</li>
+          <li data-i18n="svc4_l1">Local contact for agreed commercial activities</li>
+          <li data-i18n="svc4_l2">Product-information and customer-communication coordination</li>
+          <li data-i18n="svc4_l3">Market and competitor context tested through real conversations</li>
+          <li data-i18n="svc4_l4">Flexible ongoing support and reporting with clear responsibilities</li>
         </ul>
       </article>
     </div>
@@ -475,6 +468,17 @@ footer .mono{letter-spacing:.08em}
         <p data-i18n="proc_s7p">Document feedback, coordinate next steps, and keep momentum.</p>
       </div>
     </div>
+    <div class="deliverables rv">
+      <h3 data-i18n="deliv_h">Concrete deliverables throughout the engagement</h3>
+      <p data-i18n="deliv_p">You receive practical working documents that make decisions, responsibilities, and next steps visible.</p>
+      <ul>
+        <li data-i18n="deliv_1">Prioritized target-company list</li>
+        <li data-i18n="deliv_2">Meeting preparation brief</li>
+        <li data-i18n="deliv_3">Visit or trade-fair report</li>
+        <li data-i18n="deliv_4">Documented market feedback</li>
+        <li data-i18n="deliv_5">Structured follow-up plan</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -507,16 +511,6 @@ footer .mono{letter-spacing:.08em}
   </div>
 </section>
 
-<section class="secondary-market" id="turkey-market">
-  <div class="wrap rv">
-    <div>
-      <p class="eyebrow" data-i18n="trmarket_eyebrow">Secondary direction</p>
-      <h2 data-i18n="trmarket_h2">Germany to Turkey market development.</h2>
-    </div>
-    <p data-i18n="trmarket_p">After our primary Germany-focused offer, we also support German B2B companies exploring customers, partners, distributors, and suppliers in Turkey. The same execution-led model applies: focused research, local context, targeted outreach, meetings, and structured follow-up.</p>
-  </div>
-</section>
-
 <section class="why" id="about">
   <div class="wrap">
     <div class="why-grid">
@@ -524,8 +518,9 @@ footer .mono{letter-spacing:.08em}
         <p class="eyebrow" data-i18n="why_eyebrow">Why Germany Growth Desk</p>
         <h2 data-i18n="why_h2">Local representation, backed by real export sales experience.</h2>
         <p class="bio" style="margin-top:20px"><span class="name" style="display:block">Kaan Kadıoğlu</span><span class="role" style="display:block" data-i18n="why_role">Founder · Germany Growth Desk, Berlin</span></p>
-        <p class="bio" data-i18n="why_bio1">Kaan is a Turkish business development and export sales professional based in Berlin. He has opened the German market himself: 13 new company accounts in 7 months and around €750K in industrial B2B revenue — built through meetings, negotiation, buyer communication and disciplined follow-up.</p>
-        <p class="bio" data-i18n="why_bio2">That is exactly the work Germany Growth Desk now does for international manufacturers: visiting customers, sitting in meetings, working trade fairs, answering buyers, and keeping every opportunity structured and moving.</p>
+        <p class="bio" data-i18n="why_bio1">Before founding Germany Growth Desk, Kaan gained hands-on export sales experience developing the German market. In a previous professional role, he helped win 13 new German company accounts in seven months and contributed to approximately €750K in industrial B2B revenue.</p>
+        <p class="bio" data-i18n="why_bio2">That experience was built through meetings, negotiation, buyer communication, and disciplined follow-up. Germany Growth Desk now applies that practical approach to support international manufacturers in Germany.</p>
+        <a class="linkedin-link" href="https://www.linkedin.com/in/alaattin-kaan-kad%C4%B1o%C4%9Flu/" target="_blank" rel="noopener noreferrer" data-i18n="linkedin">LinkedIn profile</a>
       </div>
       <ul class="diff rv">
         <li><span class="k">01</span><span><b data-i18n="d1b">Berlin-based support</b><span data-i18n="d1s">On the ground for your meetings, fairs and buyer visits.</span></span></li>
@@ -538,14 +533,78 @@ footer .mono{letter-spacing:.08em}
 </section>
 
 <section class="cta" id="contact">
-  <div class="wrap rv">
-    <p class="eyebrow" data-i18n="cta_eyebrow">Next step</p>
-    <h2 data-i18n="cta_h2">Book a 20-minute call about your Germany plans.</h2>
-    <p data-i18n="cta_p">Tell us about your upcoming Germany meeting, trade fair, or market development plans. We'll tell you honestly how local representation can help — and what the first practical step looks like.</p>
-    <div class="hero-cta">
-      <a class="btn btn-signal" href="mailto:kaan@germanygrowthdesk.com?subject=Germany%20market%20call" data-i18n="cta_btn">Book your call</a>
+  <div class="wrap contact-layout rv">
+    <div>
+      <p class="eyebrow" data-i18n="cta_eyebrow">Contact</p>
+      <h2 data-i18n="cta_h2">Tell us about your plans for the German market.</h2>
+      <p data-i18n="cta_p">Share your objectives, current priorities, and the support you need. We will review the details and respond with a practical next step.</p>
+      <span class="mail" data-i18n-html="cta_mail">Or write directly: <a href="mailto:info@germanygrowthdesk.com">info@germanygrowthdesk.com</a></span>
     </div>
-    <span class="mail" data-i18n-html="cta_mail">Or write directly: <a href="mailto:kaan@germanygrowthdesk.com">kaan@germanygrowthdesk.com</a></span>
+    <form class="contact-form" id="contact-form" action="/api/contact" method="post" novalidate>
+      <p class="required-note" data-i18n="form_required_note">Fields marked * are required.</p>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="name"><span data-i18n="form_name">Name</span> <span class="required-mark" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required maxlength="120" data-i18n-placeholder="ph_name" placeholder="Your full name" aria-describedby="error-name">
+          <span class="field-error" id="error-name"></span>
+        </div>
+        <div class="form-field">
+          <label for="company"><span data-i18n="form_company">Company</span> <span class="required-mark" aria-hidden="true">*</span></label>
+          <input id="company" name="company" type="text" autocomplete="organization" required maxlength="160" data-i18n-placeholder="ph_company" placeholder="Company name" aria-describedby="error-company">
+          <span class="field-error" id="error-company"></span>
+        </div>
+        <div class="form-field">
+          <label for="email"><span data-i18n="form_email">Business email</span> <span class="required-mark" aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required maxlength="254" data-i18n-placeholder="ph_email" placeholder="name@company.com" aria-describedby="error-email">
+          <span class="field-error" id="error-email"></span>
+        </div>
+        <div class="form-field">
+          <label for="website" data-i18n="form_website">Website</label>
+          <input id="website" name="website" type="url" autocomplete="url" maxlength="300" data-i18n-placeholder="ph_website" placeholder="https://company.com" aria-describedby="error-website">
+          <span class="field-error" id="error-website"></span>
+        </div>
+        <div class="form-field">
+          <label for="country"><span data-i18n="form_country">Country</span> <span class="required-mark" aria-hidden="true">*</span></label>
+          <input id="country" name="country" type="text" autocomplete="country-name" required maxlength="100" data-i18n-placeholder="ph_country" placeholder="Country of operation" aria-describedby="error-country">
+          <span class="field-error" id="error-country"></span>
+        </div>
+        <div class="form-field">
+          <label for="industry"><span data-i18n="form_industry">Product / industry</span> <span class="required-mark" aria-hidden="true">*</span></label>
+          <input id="industry" name="industry" type="text" required maxlength="180" data-i18n-placeholder="ph_industry" placeholder="Products and industry" aria-describedby="error-industry">
+          <span class="field-error" id="error-industry"></span>
+        </div>
+        <div class="form-field full">
+          <label for="support"><span data-i18n="form_support">Required support</span> <span class="required-mark" aria-hidden="true">*</span></label>
+          <select id="support" name="support" required aria-describedby="error-support">
+            <option value="" data-i18n="opt_choose">Select the most relevant support</option>
+            <option value="Customer Visits &amp; Meetings" data-i18n="opt_visits">Customer Visits &amp; Meetings</option>
+            <option value="Trade Fair Representation" data-i18n="opt_fairs">Trade Fair Representation</option>
+            <option value="Sales Development &amp; Customer Acquisition" data-i18n="opt_sales">Sales Development &amp; Customer Acquisition</option>
+            <option value="Local Market Representation" data-i18n="opt_local">Local Market Representation</option>
+            <option value="Other" data-i18n="opt_other">Other</option>
+          </select>
+          <span class="field-error" id="error-support"></span>
+        </div>
+        <div class="form-field full">
+          <label for="message"><span data-i18n="form_message">Message</span> <span class="required-mark" aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" required maxlength="3000" data-i18n-placeholder="ph_message" placeholder="Relevant context, timing, and questions" aria-describedby="error-message"></textarea>
+          <span class="field-error" id="error-message"></span>
+        </div>
+      </div>
+      <div class="hp-field" aria-hidden="true" inert>
+        <label for="office_fax">Office fax</label>
+        <input id="office_fax" name="office_fax" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="consent">
+        <input id="privacy-consent" name="privacyConsent" type="checkbox" required aria-describedby="error-privacy-consent">
+        <label for="privacy-consent" data-i18n-html="form_consent">I have read the <a href="privacy.html?lang=en">Privacy Policy</a> and consent to the processing of my information to respond to this enquiry. <span class="required-mark" aria-hidden="true">*</span></label>
+      </div>
+      <span class="field-error" id="error-privacy-consent"></span>
+      <div class="form-actions">
+        <button class="btn btn-signal" id="form-submit" type="submit" data-i18n="form_submit">Send enquiry</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -561,7 +620,12 @@ footer .mono{letter-spacing:.08em}
 <footer>
   <div class="wrap">
     <span class="mono">GERMANY GROWTH DESK · BERLIN</span>
-    <span data-i18n="foot">On-the-ground business development in Germany for international manufacturers</span>
+    <div class="footer-copy">
+      <span data-i18n="foot">On-the-ground business development in Germany for international manufacturers</span>
+      <nav class="footer-links" aria-label="Legal">
+        <a href="privacy.html?lang=en" data-legal-link="privacy" data-i18n="foot_privacy">Privacy Policy</a>
+      </nav>
+    </div>
   </div>
 </footer>
 <script>
@@ -569,16 +633,17 @@ const I18N = {
 en: {
   _title:"Your Business Development Presence in Germany | Germany Growth Desk",
   _description:"Berlin-based customer visits, business meetings, trade fair attendance, local representation, and sales development for international manufacturers entering Germany.",
-  nav_services:"Services", nav_solution:"How it works", nav_process:"Process", nav_about:"About", nav_cta:"Book a call",
+  nav_services:"Services", nav_solution:"How it works", nav_process:"Process", nav_about:"About", nav_cta:"Contact",
   hero_eyebrow:"Berlin · On-the-ground business development in Germany",
   hero_h1:"Your business development presence <em>in Germany.</em>",
   hero_lead:"We help international manufacturers develop the German market through customer visits, business meetings, trade fair attendance, local representation, and targeted sales development.",
   hero_supporting:"Based in Berlin, Germany Growth Desk serves as your external, on-the-ground business development partner, helping you build professional customer relationships.",
-  hero_cta1:"Develop the German market", hero_cta2:"Book a discovery call",
+  hero_cta1:"Develop the German market", hero_cta2:"Contact us",
   hero_ist:"· Your manufacturing base", hero_ber:"· Your local desk",
-  proof_1:"new German accounts opened in 7 months",
-  proof_2:"export revenue generated in industrial B2B sales",
+  proof_1:"new German accounts won in a previous professional role in 7 months",
+  proof_2:"industrial B2B revenue contributed to in a previous professional role",
   proof_3:"based in Germany and available for customer visits nationwide",
+  proof_note:"Results from the founder's previous professional experience.",
   prob_eyebrow:"The problem",
   prob_h2:"The German market needs more than remote outreach.",
   prob_p:"Many international manufacturers are ready for Germany, but not yet ready to open an office, hire a full-time local sales manager, or fly in for every meeting.",
@@ -600,42 +665,30 @@ en: {
   sol_l4:"Document market feedback and move every next step forward",
   svc_eyebrow:"Services",
   svc_h2:"From finding the right company to walking through its door.",
-  svc1_h:"Customer Visits & Meetings in Germany",
-  svc1_p:"We visit potential buyers, existing customers, distributors, and business partners on your behalf or together with your team — so every important conversation does not require another flight to Germany.",
-  svc1_l1:"Introductory meetings and customer relationship visits",
-  svc1_l2:"Professional presentation of your company, products, and capabilities",
-  svc1_l3:"Commercial feedback and meeting reports after every visit",
+  svc1_h:"Customer Visits & Meetings",
+  svc1_p:"We prepare and conduct focused visits with potential buyers, existing customers, distributors, and business partners on your behalf or together with your team.",
+  svc1_l1:"Prioritized companies and meeting objectives prepared before each visit",
+  svc1_l2:"Introductory meetings and relationship-development visits",
+  svc1_l3:"Professional presentation, commercial feedback, and visit reports",
   svc1_l4:"Structured follow-up and coordination of next steps",
-  svc2_h:"Trade Fair Attendance & Representation",
+  svc2_h:"Trade Fair Representation",
   svc2_p:"We attend relevant German trade fairs for you, visit target exhibitors and buyers, introduce your capabilities, and create a structured follow-up plan — even when you do not exhibit or travel.",
   svc2_l1:"Target-company lists and meetings prepared before the event",
   svc2_l2:"Attendance on your behalf or alongside your own team",
   svc2_l3:"Initial conversations, contact collection, and opportunity notes",
   svc2_l4:"Post-event report, follow-up plan, and meeting coordination",
-  svc3_h:"Local Business Representation",
-  svc3_p:"We provide a flexible external business development presence for manufacturers that are not yet ready for a German office or full-time local sales hire.",
-  svc3_l1:"Local contact for agreed commercial activities",
-  svc3_l2:"Customer communication and product-information coordination",
-  svc3_l3:"Meeting attendance, visit support, and relationship development",
-  svc3_l4:"Ongoing reporting with clear boundaries and responsibilities",
-  svc4_h:"B2B Sales Development & Customer Acquisition",
-  svc4_p:"We turn target accounts into active commercial conversations through decision-maker outreach, meeting coordination, local visits, and disciplined follow-up.",
-  svc4_l1:"Target-account and decision-maker prioritization",
-  svc4_l2:"Personalized B2B outreach and meeting arrangement",
-  svc4_l3:"Sales conversations supported in the German market",
-  svc4_l4:"CRM tracking and consistent opportunity follow-up",
-  svc5_h:"Buyer & Distributor Search",
-  svc5_p:"We identify and qualify the German buyers, importers, wholesalers, distributors, and business partners that best fit your offer.",
-  svc5_l1:"Buyer, importer, wholesaler, and distributor mapping",
-  svc5_l2:"Research focused on actionable target companies",
-  svc5_l3:"Prioritization based on fit and real market feedback",
-  svc5_l4:"Introductions and outreach prepared for decision-makers",
-  svc6_h:"German Market Entry Support",
-  svc6_p:"We combine practical market research with customer conversations, visits, fairs, and ongoing execution to build a grounded entry plan.",
-  svc6_l1:"Market and competitor context for commercial decisions",
-  svc6_l2:"Entry priorities tested through real conversations",
-  svc6_l3:"Feedback loops between the market and your team",
-  svc6_l4:"Flexible monthly business development support from Berlin",
+  svc3_h:"Sales Development & Customer Acquisition",
+  svc3_p:"We identify and qualify German buyers, importers, distributors, and partners, then turn the best-fit accounts into active commercial conversations.",
+  svc3_l1:"Buyer, importer, wholesaler, and distributor mapping",
+  svc3_l2:"Target-account and decision-maker prioritization",
+  svc3_l3:"Personalized outreach, meeting arrangement, and local sales support",
+  svc3_l4:"CRM tracking, market feedback, and consistent opportunity follow-up",
+  svc4_h:"Local Market Representation",
+  svc4_p:"We provide a flexible external presence for manufacturers that need grounded market-entry execution before opening a German office or making a full-time local hire.",
+  svc4_l1:"Local contact for agreed commercial activities",
+  svc4_l2:"Product-information and customer-communication coordination",
+  svc4_l3:"Market and competitor context tested through real conversations",
+  svc4_l4:"Flexible ongoing support and reporting with clear responsibilities",
   proc_eyebrow:"The process",
   proc_h2:"Research is the starting point. Market execution is the work.",
   proc_p:"We connect the full journey: identify, contact, arrange, visit, meet, represent, and follow up.",
@@ -646,6 +699,10 @@ en: {
   proc_s5:"Meet", proc_s5p:"Present your capabilities and understand the opportunity directly.",
   proc_s6:"Represent", proc_s6p:"Support your commercial interests within the agreed scope.",
   proc_s7:"Follow Up", proc_s7p:"Document feedback, coordinate next steps, and keep momentum.",
+  deliv_h:"Concrete deliverables throughout the engagement",
+  deliv_p:"You receive practical working documents that make decisions, responsibilities, and next steps visible.",
+  deliv_1:"Prioritized target-company list", deliv_2:"Meeting preparation brief",
+  deliv_3:"Visit or trade-fair report", deliv_4:"Documented market feedback", deliv_5:"Structured follow-up plan",
   who_eyebrow:"Who we help",
   who_h2:"Export-ready Turkish and international manufacturers that want to enter or grow in Germany.",
   chip1:"Construction & building materials", chip2:"Industrial components", chip3:"Machinery parts",
@@ -658,37 +715,54 @@ en: {
   why_eyebrow:"Why Germany Growth Desk",
   why_h2:"Local representation, backed by real export sales experience.",
   why_role:"Founder · Germany Growth Desk, Berlin",
-  why_bio1:"Kaan is a Turkish business development and export sales professional based in Berlin. He has opened the German market himself: 13 new company accounts in 7 months and around €750K in industrial B2B revenue — built through meetings, negotiation, buyer communication and disciplined follow-up.",
-  trmarket_eyebrow:"Secondary direction",
-  trmarket_h2:"Germany to Turkey market development.",
-  trmarket_p:"After our primary Germany-focused offer, we also support German B2B companies exploring customers, partners, distributors, and suppliers in Turkey. The same execution-led model applies: focused research, local context, targeted outreach, meetings, and structured follow-up.",
-  why_bio2:"That is exactly the work Germany Growth Desk now does for international manufacturers: visiting customers, sitting in meetings, working trade fairs, answering buyers, and keeping every opportunity structured and moving.",
+  why_bio1:"Before founding Germany Growth Desk, Kaan gained hands-on export sales experience developing the German market. In a previous professional role, he helped win 13 new German company accounts in seven months and contributed to approximately €750K in industrial B2B revenue.",
+  why_bio2:"That experience was built through meetings, negotiation, buyer communication, and disciplined follow-up. Germany Growth Desk now applies that practical approach to support international manufacturers in Germany.",
+  linkedin:"LinkedIn profile",
   d1b:"Berlin-based support", d1s:"On the ground for your meetings, fairs and buyer visits.",
   d2b:"Cross-cultural understanding, German market orientation", d2s:"German and Turkish business cultures first-hand, in three languages.",
   d3b:"B2B sales and buyer communication experience", d3s:"Not theory: meetings held, quotes negotiated, accounts won.",
   d4b:"Fair support and structured follow-up", d4s:"Every conversation documented, tracked and followed up.",
-  cta_eyebrow:"Next step",
-  cta_h2:"Book a 20-minute call about your Germany plans.",
-  cta_p:"Tell us about your upcoming Germany meeting, trade fair, or market development plans. We'll tell you honestly how local representation can help — and what the first practical step looks like.",
-  cta_btn:"Book your call",
-  cta_mail:'Or write directly: <a href="mailto:kaan@germanygrowthdesk.com">kaan@germanygrowthdesk.com</a>',
+  cta_eyebrow:"Contact",
+  cta_h2:"Tell us about your plans for the German market.",
+  cta_p:"Share your objectives, current priorities, and the support you need. We will review the details and respond with a practical next step.",
+  cta_mail:'Or write directly: <a href="mailto:info@germanygrowthdesk.com">info@germanygrowthdesk.com</a>',
+  form_required_note:"Fields marked * are required.",
+  form_name:"Name", ph_name:"Your full name",
+  form_company:"Company", ph_company:"Company name",
+  form_email:"Business email", ph_email:"name@company.com",
+  form_website:"Website", ph_website:"https://company.com",
+  form_country:"Country", ph_country:"Country of operation",
+  form_industry:"Product / industry", ph_industry:"Products and industry",
+  form_support:"Required support", opt_choose:"Select the most relevant support",
+  opt_visits:"Customer Visits & Meetings", opt_fairs:"Trade Fair Representation",
+  opt_sales:"Sales Development & Customer Acquisition", opt_local:"Local Market Representation", opt_other:"Other",
+  form_message:"Message", ph_message:"Relevant context, timing, and questions",
+  form_consent:'I have read the <a href="privacy.html?lang=en">Privacy Policy</a> and consent to the processing of my information to respond to this enquiry. <span class="required-mark" aria-hidden="true">*</span>',
+  form_submit:"Send enquiry", form_loading:"Sending…",
+  form_success:"Thank you. Your enquiry has been sent successfully.",
+  form_error:"We could not send your enquiry. Please try again or email info@germanygrowthdesk.com.",
+  form_invalid:"Please review the highlighted fields.",
+  error_required:"Please complete this required field.", error_email:"Please enter a valid business email address.",
+  error_url:"Please enter a complete URL beginning with http:// or https://.", error_consent:"Please accept the Privacy Policy consent to continue.",
   legal_k:"Note",
   legal_p:"Germany Growth Desk provides commercial representation and business development support. It does not sign legally binding contracts on behalf of clients unless separately authorized in writing.",
-  foot:"On-the-ground business development in Germany for international manufacturers"
+  foot:"On-the-ground business development in Germany for international manufacturers",
+  foot_privacy:"Privacy Policy"
 },
 de: {
   _title:"Ihr Business-Development-Partner vor Ort in Deutschland | Germany Growth Desk",
   _description:"Kundenbesuche, Geschäftstermine, Messepräsenz, lokale Unternehmensvertretung und Vertriebsentwicklung für internationale Hersteller — mit Sitz in Berlin.",
-  nav_services:"Leistungen", nav_solution:"So arbeiten wir", nav_process:"Prozess", nav_about:"Über uns", nav_cta:"Gespräch buchen",
+  nav_services:"Leistungen", nav_solution:"So arbeiten wir", nav_process:"Prozess", nav_about:"Über uns", nav_cta:"Kontakt",
   hero_eyebrow:"Berlin · Business Development vor Ort in Deutschland",
   hero_h1:"Ihr Business-Development-Partner <em>vor Ort in Deutschland.</em>",
   hero_lead:"Wir unterstützen internationale Hersteller beim Aufbau des deutschen Marktes — durch Kundenbesuche, Geschäftstermine, Messepräsenz, lokale Unternehmensvertretung und gezielte Vertriebsentwicklung.",
   hero_supporting:"Germany Growth Desk mit Sitz in Berlin fungiert als Ihr externer Business-Development-Partner vor Ort und unterstützt Sie beim Aufbau professioneller Kundenbeziehungen.",
-  hero_cta1:"Deutschen Markt erschließen", hero_cta2:"Kennenlerngespräch buchen",
+  hero_cta1:"Deutschen Markt erschließen", hero_cta2:"Kontakt aufnehmen",
   hero_ist:"· Ihr Produktionsstandort", hero_ber:"· Ihre Präsenz vor Ort",
-  proof_1:"neue Firmenkunden in Deutschland in 7 Monaten gewonnen",
-  proof_2:"Exportumsatz im industriellen B2B-Vertrieb",
+  proof_1:"neue deutsche Firmenkunden in einer früheren beruflichen Position innerhalb von 7 Monaten gewonnen",
+  proof_2:"Industrie-B2B-Umsatz, zu dem Kaan in einer früheren beruflichen Position beitrug",
   proof_3:"in Deutschland ansässig und bundesweit für Kundenbesuche im Einsatz",
+  proof_note:"Ergebnisse aus der früheren Berufserfahrung des Gründers.",
   prob_eyebrow:"Das Problem",
   prob_h2:"Der deutsche Markt lässt sich nicht allein aus der Ferne erschließen.",
   prob_p:"Viele internationale Hersteller sind bereit für den deutschen Markt, möchten aber noch kein eigenes Büro eröffnen, keinen Vollzeit-Vertriebsmitarbeiter einstellen und nicht für jeden Termin anreisen.",
@@ -710,42 +784,30 @@ de: {
   sol_l4:"Marktfeedback dokumentieren und die nächsten Schritte konsequent vorantreiben",
   svc_eyebrow:"Leistungen",
   svc_h2:"Vom passenden Zielunternehmen bis zum persönlichen Termin vor Ort.",
-  svc1_h:"Kundenbesuche & Geschäftstermine in Deutschland",
-  svc1_p:"Wir besuchen potenzielle Einkäufer, Bestandskunden, Distributoren und Geschäftspartner in Ihrem Auftrag oder gemeinsam mit Ihrem Team. So erfordert nicht jedes wichtige Gespräch eine weitere Reise nach Deutschland.",
-  svc1_l1:"Erstgespräche sowie Besuche zur Pflege und Entwicklung von Kundenbeziehungen",
-  svc1_l2:"Professionelle Präsentation Ihres Unternehmens, Ihrer Produkte und Kapazitäten",
-  svc1_l3:"Kommerzielles Marktfeedback und ein strukturierter Besuchsbericht nach jedem Termin",
+  svc1_h:"Kundenbesuche & Geschäftstermine",
+  svc1_p:"Wir bereiten gezielte Besuche bei potenziellen Einkäufern, Bestandskunden, Distributoren und Geschäftspartnern vor und führen sie in Ihrem Auftrag oder gemeinsam mit Ihrem Team durch.",
+  svc1_l1:"Priorisierte Unternehmen und klare Gesprächsziele vor jedem Besuch",
+  svc1_l2:"Erstgespräche und Besuche zur Entwicklung von Kundenbeziehungen",
+  svc1_l3:"Professionelle Präsentation, kommerzielles Feedback und Besuchsberichte",
   svc1_l4:"Strukturiertes Nachfassen und Koordination der nächsten Schritte",
-  svc2_h:"Messepräsenz & Unternehmensvertretung",
+  svc2_h:"Messevertretung",
   svc2_p:"Wir besuchen relevante deutsche Fachmessen in Ihrem Auftrag, sprechen mit ausgewählten Ausstellern und potenziellen Kunden, stellen Ihre Kompetenzen vor und entwickeln einen strukturierten Plan für die Nachbereitung — auch wenn Sie selbst weder ausstellen noch anreisen.",
   svc2_l1:"Auswahl der Zielunternehmen und Vorbereitung von Gesprächen vor der Messe",
   svc2_l2:"Teilnahme in Ihrem Auftrag oder gemeinsam mit Ihrem eigenen Team",
   svc2_l3:"Erstgespräche, Erfassung relevanter Kontakte und Bewertung von Geschäftschancen",
   svc2_l4:"Messebericht, Nachbereitungsplan und Koordination weiterer Termine",
-  svc3_h:"Lokale Geschäftsvertretung",
-  svc3_p:"Wir bieten flexible externe Business-Development-Unterstützung für Hersteller, die noch keine Niederlassung in Deutschland eröffnen oder keinen lokalen Vollzeit-Vertriebsmitarbeiter einstellen möchten.",
-  svc3_l1:"Ansprechpartner vor Ort für vereinbarte kommerzielle Aktivitäten",
-  svc3_l2:"Kundenkommunikation und Koordination von Produktinformationen",
-  svc3_l3:"Begleitung von Terminen und Besuchen sowie Aufbau von Kundenbeziehungen",
-  svc3_l4:"Regelmäßiges Reporting mit klar definierten Befugnissen und Verantwortlichkeiten",
-  svc4_h:"B2B-Vertriebsentwicklung & Neukundengewinnung",
-  svc4_p:"Wir sprechen Entscheider in Zielunternehmen an, koordinieren Termine, führen Besuche vor Ort durch und entwickeln mit konsequentem Nachfassen konkrete Vertriebschancen.",
-  svc4_l1:"Priorisierung passender Zielkunden und relevanter Entscheider",
-  svc4_l2:"Personalisierte B2B-Ansprache und Terminvereinbarung",
-  svc4_l3:"Begleitung von Verkaufsgesprächen im deutschen Markt",
-  svc4_l4:"Dokumentation im CRM und konsequentes Nachfassen bei Vertriebschancen",
-  svc5_h:"Einkäufer- & Distributorensuche",
-  svc5_p:"Wir identifizieren und bewerten deutsche Einkäufer, Importeure, Großhändler, Distributoren und Geschäftspartner, die zu Ihrem Angebot und Ihren Zielen passen.",
-  svc5_l1:"Identifikation geeigneter Einkäufer, Importeure, Großhändler und Distributoren",
-  svc5_l2:"Recherche mit Fokus auf konkret ansprechbare Unternehmen",
-  svc5_l3:"Priorisierung nach strategischer Passung und echtem Marktfeedback",
-  svc5_l4:"Vorbereitung der Unternehmensvorstellung und gezielten Entscheideransprache",
-  svc6_h:"Unterstützung beim deutschen Markteintritt",
-  svc6_p:"Wir verbinden praxisnahe Marktrecherche mit Kundengesprächen, Besuchen, Fachmessen und kontinuierlicher Umsetzung und entwickeln daraus einen belastbaren Markteintrittsplan.",
-  svc6_l1:"Markt- und Wettbewerbsanalyse als Grundlage kommerzieller Entscheidungen",
-  svc6_l2:"Überprüfung der Markteintrittsprioritäten durch echte Kundengespräche",
-  svc6_l3:"Regelmäßige Rückmeldung aus dem Markt an Ihr Team",
-  svc6_l4:"Flexible monatliche Business-Development-Unterstützung von Berlin aus",
+  svc3_h:"Vertriebsentwicklung & Neukundengewinnung",
+  svc3_p:"Wir identifizieren und qualifizieren deutsche Einkäufer, Importeure, Distributoren und Geschäftspartner und entwickeln die passendsten Zielkunden zu aktiven Geschäftsgesprächen.",
+  svc3_l1:"Erfassung geeigneter Einkäufer, Importeure, Großhändler und Distributoren",
+  svc3_l2:"Priorisierung passender Zielkunden und relevanter Entscheider",
+  svc3_l3:"Personalisierte Ansprache, Terminvereinbarung und lokale Vertriebsunterstützung",
+  svc3_l4:"CRM-Dokumentation, Marktfeedback und konsequentes Nachfassen",
+  svc4_h:"Lokale Marktvertretung",
+  svc4_p:"Wir schaffen eine flexible externe Präsenz für Hersteller, die ihren Markteintritt praxisnah umsetzen möchten, bevor sie ein deutsches Büro eröffnen oder eine lokale Vollzeitkraft einstellen.",
+  svc4_l1:"Ansprechpartner vor Ort für vereinbarte kommerzielle Aktivitäten",
+  svc4_l2:"Koordination von Produktinformationen und Kundenkommunikation",
+  svc4_l3:"Markt- und Wettbewerbskontext, überprüft durch reale Gespräche",
+  svc4_l4:"Flexible laufende Unterstützung und Reporting mit klaren Verantwortlichkeiten",
   proc_eyebrow:"Der Prozess",
   proc_h2:"Recherche ist der Ausgangspunkt. Entscheidend ist die Umsetzung im Markt.",
   proc_p:"Wir steuern den gesamten Weg: Zielunternehmen identifizieren, Entscheider ansprechen, Termine vereinbaren, Kunden besuchen, Gespräche führen, Ihr Unternehmen vertreten und konsequent nachfassen.",
@@ -756,6 +818,10 @@ de: {
   proc_s5:"Gespräch", proc_s5p:"Wir präsentieren Ihre Kompetenzen und bewerten den konkreten Bedarf und die Geschäftschance.",
   proc_s6:"Vertretung", proc_s6p:"Wir unterstützen Ihre kommerziellen Interessen innerhalb des vereinbarten Rahmens.",
   proc_s7:"Nachfassen", proc_s7p:"Wir dokumentieren Feedback, koordinieren die nächsten Schritte und halten den Prozess in Bewegung.",
+  deliv_h:"Konkrete Ergebnisse während der Zusammenarbeit",
+  deliv_p:"Sie erhalten praxisnahe Arbeitsdokumente, die Entscheidungen, Verantwortlichkeiten und nächste Schritte transparent machen.",
+  deliv_1:"Priorisierte Zielunternehmensliste", deliv_2:"Briefing zur Gesprächsvorbereitung",
+  deliv_3:"Besuchs- oder Messebericht", deliv_4:"Dokumentiertes Marktfeedback", deliv_5:"Strukturierter Nachfassplan",
   who_eyebrow:"Für wen wir arbeiten",
   who_h2:"Exportbereite türkische und internationale Hersteller, die in Deutschland einsteigen oder wachsen wollen.",
   chip1:"Bauprodukte & Baustoffe", chip2:"Industriekomponenten", chip3:"Maschinenteile",
@@ -768,37 +834,54 @@ de: {
   why_eyebrow:"Warum Germany Growth Desk",
   why_h2:"Lokale Unterstützung, gestützt auf nachweisbare Erfahrung im Exportvertrieb.",
   why_role:"Gründer · Germany Growth Desk, Berlin",
-  why_bio1:"Kaan arbeitet von Berlin aus im Business Development und Exportvertrieb. Er hat den deutschen Markt selbst erschlossen, innerhalb von 7 Monaten 13 neue Geschäftskunden gewonnen und im industriellen B2B-Vertrieb rund 750.000 € Umsatz erzielt. Grundlage dafür waren persönliche Termine, Verhandlungen, professionelle Einkäuferkommunikation und konsequentes Nachfassen.",
-  trmarket_eyebrow:"Zweites Geschäftsfeld",
-  trmarket_h2:"Marktentwicklung für deutsche Unternehmen in der Türkei.",
-  trmarket_p:"Unser Schwerpunkt liegt auf der Marktentwicklung internationaler Hersteller in Deutschland. Darüber hinaus unterstützen wir deutsche B2B-Unternehmen bei der Suche nach Kunden, Geschäftspartnern, Distributoren und Lieferanten in der Türkei. Auch hier verbinden wir gezielte Recherche, lokale Marktkenntnis, direkte Ansprache, Geschäftstermine und strukturiertes Nachfassen.",
-  why_bio2:"Diese Erfahrung setzt Germany Growth Desk heute für internationale Hersteller ein: Wir besuchen Kunden, nehmen an Geschäftsterminen und Fachmessen teil, führen die Kommunikation mit Einkäufern und entwickeln jede Chance in einem strukturierten Vertriebsprozess weiter.",
+  why_bio1:"Vor der Gründung von Germany Growth Desk sammelte Kaan praktische Exportvertriebserfahrung beim Aufbau des deutschen Marktes. In einer früheren beruflichen Position half er dabei, innerhalb von sieben Monaten 13 neue deutsche Firmenkunden zu gewinnen, und trug zu rund 750.000 € Umsatz im industriellen B2B-Geschäft bei.",
+  why_bio2:"Diese Erfahrung entstand durch persönliche Gespräche, Verhandlungen, professionelle Einkäuferkommunikation und konsequentes Nachfassen. Germany Growth Desk überträgt diesen praxisnahen Ansatz heute auf die Unterstützung internationaler Hersteller in Deutschland.",
+  linkedin:"LinkedIn-Profil",
   d1b:"Unterstützung aus Berlin", d1s:"Vor Ort für Ihre Termine, Messen und Einkäuferbesuche.",
   d2b:"Verständnis der deutschen und türkischen Geschäftskultur", d2s:"Wir kennen die Arbeitsweisen in beiden Märkten aus eigener Erfahrung und kommunizieren in drei Sprachen.",
   d3b:"B2B-Vertrieb und professionelle Einkäuferkommunikation", d3s:"Erfahrung aus realen Terminen, Verhandlungen und erfolgreich gewonnenen Kunden.",
   d4b:"Messebegleitung und strukturiertes Nachfassen", d4s:"Wir dokumentieren jedes Gespräch, vereinbaren nächste Schritte und fassen konsequent nach.",
-  cta_eyebrow:"Nächster Schritt",
-  cta_h2:"Besprechen Sie Ihre Deutschland-Pläne in einem 20-minütigen Erstgespräch.",
-  cta_p:"Erzählen Sie uns von Ihrem nächsten Geschäftstermin, Ihrer Messe oder Ihren Plänen für den deutschen Markt. Wir zeigen Ihnen offen, welchen Beitrag lokale Unterstützung leisten kann und welcher erste konkrete Schritt sinnvoll ist.",
-  cta_btn:"Erstgespräch buchen",
-  cta_mail:'Oder schreiben Sie direkt: <a href="mailto:kaan@germanygrowthdesk.com">kaan@germanygrowthdesk.com</a>',
+  cta_eyebrow:"Kontakt",
+  cta_h2:"Erzählen Sie uns von Ihren Plänen für den deutschen Markt.",
+  cta_p:"Teilen Sie uns Ihre Ziele, aktuellen Prioritäten und den benötigten Unterstützungsbedarf mit. Wir prüfen die Angaben und melden uns mit einem konkreten nächsten Schritt.",
+  cta_mail:'Oder schreiben Sie direkt: <a href="mailto:info@germanygrowthdesk.com">info@germanygrowthdesk.com</a>',
+  form_required_note:"Mit * gekennzeichnete Felder sind Pflichtfelder.",
+  form_name:"Name", ph_name:"Ihr vollständiger Name",
+  form_company:"Unternehmen", ph_company:"Unternehmensname",
+  form_email:"Geschäftliche E-Mail", ph_email:"name@unternehmen.de",
+  form_website:"Website", ph_website:"https://unternehmen.de",
+  form_country:"Land", ph_country:"Land der Geschäftstätigkeit",
+  form_industry:"Produkt / Branche", ph_industry:"Produkte und Branche",
+  form_support:"Benötigte Unterstützung", opt_choose:"Passende Unterstützung auswählen",
+  opt_visits:"Kundenbesuche & Geschäftstermine", opt_fairs:"Messevertretung",
+  opt_sales:"Vertriebsentwicklung & Neukundengewinnung", opt_local:"Lokale Marktvertretung", opt_other:"Sonstiges",
+  form_message:"Nachricht", ph_message:"Relevanter Kontext, Zeitplan und Fragen",
+  form_consent:'Ich habe die <a href="privacy.html?lang=de">Datenschutzerklärung</a> gelesen und willige in die Verarbeitung meiner Angaben zur Beantwortung dieser Anfrage ein. <span class="required-mark" aria-hidden="true">*</span>',
+  form_submit:"Anfrage senden", form_loading:"Wird gesendet…",
+  form_success:"Vielen Dank. Ihre Anfrage wurde erfolgreich gesendet.",
+  form_error:"Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie an info@germanygrowthdesk.com.",
+  form_invalid:"Bitte prüfen Sie die markierten Felder.",
+  error_required:"Bitte füllen Sie dieses Pflichtfeld aus.", error_email:"Bitte geben Sie eine gültige geschäftliche E-Mail-Adresse ein.",
+  error_url:"Bitte geben Sie eine vollständige URL ein, die mit http:// oder https:// beginnt.", error_consent:"Bitte stimmen Sie der Datenschutzerklärung zu, um fortzufahren.",
   legal_k:"Hinweis",
   legal_p:"Germany Growth Desk bietet kommerzielle Vertretung und Business-Development-Unterstützung. Rechtlich bindende Verträge werden nur dann im Namen eines Kunden unterzeichnet, wenn hierfür eine gesonderte schriftliche Vollmacht vorliegt.",
-  foot:"Business Development vor Ort in Deutschland für internationale Hersteller"
+  foot:"Business Development vor Ort in Deutschland für internationale Hersteller",
+  foot_privacy:"Datenschutzerklärung"
 },
 tr: {
   _title:"Almanya'daki Yerel İş Geliştirme Ortağınız | Germany Growth Desk",
   _description:"Uluslararası üreticiler için Berlin merkezli müşteri ziyaretleri, iş görüşmeleri, fuar katılımı, yerel ticari temsil ve Almanya pazarında satış geliştirme desteği.",
-  nav_services:"Hizmetler", nav_solution:"Nasıl çalışıyoruz", nav_process:"Süreç", nav_about:"Hakkımızda", nav_cta:"Görüşme planlayın",
+  nav_services:"Hizmetler", nav_solution:"Nasıl çalışıyoruz", nav_process:"Süreç", nav_about:"Hakkımızda", nav_cta:"İletişim",
   hero_eyebrow:"Berlin merkezli · Almanya'da sahada iş geliştirme",
   hero_h1:"Almanya'daki <em>yerel iş geliştirme ortağınız.</em>",
   hero_lead:"Uluslararası üreticilerin Almanya'da müşteri ziyaretleri, iş görüşmeleri, fuar katılımı, yerel ticari temsil ve hedefli satış çalışmalarıyla yeni iş fırsatları geliştirmesine destek oluyoruz.",
   hero_supporting:"Berlin merkezli Germany Growth Desk, Almanya’daki dış kaynak iş geliştirme ortağınız olarak sahada çalışır; profesyonel müşteri ilişkileri kurmanıza ve geliştirmenize yardımcı olur.",
-  hero_cta1:"Almanya pazarında büyüyün", hero_cta2:"Tanışma görüşmesi planlayın",
+  hero_cta1:"Almanya pazarında büyüyün", hero_cta2:"Bize ulaşın",
   hero_ist:"· Üretim merkeziniz", hero_ber:"· Yerel iş geliştirme desteğiniz",
-  proof_1:"7 ayda kazanılan yeni kurumsal müşteri",
-  proof_2:"endüstriyel B2B satışlarından elde edilen ihracat cirosu",
+  proof_1:"önceki bir profesyonel görevde 7 ay içinde kazanılmasına katkı sağlanan yeni Alman şirket müşterisi",
+  proof_2:"önceki bir profesyonel görevde katkı sağlanan endüstriyel B2B cirosu",
   proof_3:"Almanya genelindeki müşteri ziyaretleri için sahada",
+  proof_note:"Kurucunun önceki mesleki deneyiminden elde edilen sonuçlar.",
   prob_eyebrow:"Sorun",
   prob_h2:"Almanya pazarında uzaktan iletişim tek başına yeterli değildir.",
   prob_p:"Birçok uluslararası üretici Almanya pazarı için hazır olsa da henüz burada ofis açmak, tam zamanlı bir satış yöneticisi istihdam etmek veya her görüşme için seyahat etmek istemez.",
@@ -820,42 +903,30 @@ tr: {
   sol_l4:"Pazar geri bildirimlerini kaydetmek ve sonraki adımların uygulanmasını sağlamak",
   svc_eyebrow:"Hizmetler",
   svc_h2:"Doğru şirketi bulmaktan yüz yüze görüşmeye kadar.",
-  svc1_h:"Almanya'da Müşteri Ziyaretleri ve İş Görüşmeleri",
-  svc1_p:"Potansiyel alıcıları, mevcut müşterileri, distribütörleri ve iş ortaklarını sizin adınıza veya ekibinizle birlikte ziyaret ederiz. Böylece her önemli görüşme için yeniden Almanya'ya seyahat etmeniz gerekmez.",
-  svc1_l1:"İlk tanışma görüşmeleri ve müşteri ilişkilerini güçlendirmeye yönelik ziyaretler",
-  svc1_l2:"Şirketinizin, ürünlerinizin ve kapasitenizin profesyonel sunumu",
-  svc1_l3:"Her ziyaretin ardından ticari değerlendirme ve ayrıntılı görüşme raporu",
+  svc1_h:"Müşteri Ziyaretleri ve İş Görüşmeleri",
+  svc1_p:"Potansiyel alıcılar, mevcut müşteriler, distribütörler ve iş ortaklarıyla odaklı ziyaretleri hazırlar; sizin adınıza veya ekibinizle birlikte gerçekleştiririz.",
+  svc1_l1:"Her ziyaret öncesinde öncelikli şirketler ve net görüşme hedefleri",
+  svc1_l2:"İlk tanışma görüşmeleri ve ilişki geliştirme ziyaretleri",
+  svc1_l3:"Profesyonel sunum, ticari geri bildirim ve ziyaret raporları",
   svc1_l4:"Planlı takip ve sonraki adımların koordinasyonu",
-  svc2_h:"Fuar Katılımı ve Şirket Temsili",
+  svc2_h:"Fuar Temsil Hizmeti",
   svc2_p:"Sizin adınıza Almanya'daki ilgili fuarlara katılır; hedef firmaların stantlarını ziyaret eder, potansiyel alıcılarla görüşür, şirketinizin yetkinliklerini tanıtır ve fuar sonrası takip planını hazırlarız. Siz fuara gelmeseniz veya stant açmasanız da pazarı sahada araştırabiliriz.",
   svc2_l1:"Fuar öncesinde hedef şirket listesinin hazırlanması ve görüşmelerin planlanması",
   svc2_l2:"Sizin adınıza veya ekibinizle birlikte fuara katılım",
   svc2_l3:"İlk görüşmelerin yapılması, ilgili kişilerin ve iletişim bilgilerinin kaydedilmesi ve fırsatların değerlendirilmesi",
   svc2_l4:"Fuar sonrası rapor, takip planı ve yeni görüşmelerin koordinasyonu",
-  svc3_h:"Almanya'da Yerel Ticari Temsil",
-  svc3_p:"Henüz Almanya'da ofis açmak veya tam zamanlı bir satış yöneticisi istihdam etmek istemeyen üreticilere esnek bir dış kaynak iş geliştirme desteği sunarız.",
-  svc3_l1:"Kararlaştırılan ticari faaliyetler için Almanya'da yerel temas noktası",
-  svc3_l2:"Müşteri iletişimi ve ürün bilgilerinin koordinasyonu",
-  svc3_l3:"İş görüşmelerine katılım, müşteri ziyaretleri ve ilişki geliştirme desteği",
-  svc3_l4:"Yetki sınırlarının ve sorumlulukların açıkça tanımlandığı düzenli raporlama",
-  svc4_h:"B2B Satış Geliştirme ve Yeni Müşteri Kazanımı",
-  svc4_p:"Hedef şirketlerdeki karar vericilere ulaşır, görüşmeler planlar, yerinde ziyaretler gerçekleştirir, fırsatları disiplinli biçimde takip eder ve satış sürecinde somut adımlara dönüştürürüz.",
-  svc4_l1:"Hedef şirketlerin ve karar vericilerin önceliklendirilmesi",
-  svc4_l2:"Şirkete özel B2B iletişimi ve görüşme planlama",
-  svc4_l3:"Almanya'daki satış görüşmelerine yerel destek",
-  svc4_l4:"Tüm bağlantıların CRM'e kaydedilmesi ve fırsatların düzenli takibi",
-  svc5_h:"Alıcı ve Distribütör Araştırması",
-  svc5_p:"Ürünlerinize ve hedeflerinize en uygun Alman alıcıları, ithalatçıları, toptancıları, distribütörleri ve iş ortaklarını belirler, ön değerlendirmeden geçiririz.",
-  svc5_l1:"Alıcı, ithalatçı, toptancı ve distribütör adaylarının belirlenmesi",
-  svc5_l2:"İletişime geçilebilecek somut hedef şirketlere odaklanan araştırma",
-  svc5_l3:"Şirket ve ürün uyumu ile gerçek pazar geri bildirimine göre önceliklendirme",
-  svc5_l4:"Karar vericilere yönelik tanıtım ve ilk temas hazırlığı",
-  svc6_h:"Almanya Pazarına Giriş Desteği",
-  svc6_p:"Uygulanabilir bir pazara giriş planı oluşturmak için pazar araştırmasını müşteri görüşmeleri, ziyaretler, fuarlar ve düzenli saha çalışmasıyla birleştiririz.",
-  svc6_l1:"Ticari kararları destekleyen pazar ve rakip analizi",
-  svc6_l2:"Pazara giriş önceliklerinin gerçek müşteri görüşmeleriyle test edilmesi",
-  svc6_l3:"Sahadan alınan geri bildirimlerin ekibinize düzenli aktarılması",
-  svc6_l4:"Berlin merkezli, esnek aylık iş geliştirme desteği",
+  svc3_h:"Satış Geliştirme ve Yeni Müşteri Kazanımı",
+  svc3_p:"Alman alıcıları, ithalatçıları, distribütörleri ve iş ortaklarını belirleyip ön değerlendirmeden geçirir; en uygun hedef şirketleri aktif ticari görüşmelere dönüştürürüz.",
+  svc3_l1:"Alıcı, ithalatçı, toptancı ve distribütör adaylarının belirlenmesi",
+  svc3_l2:"Hedef şirketlerin ve ilgili karar vericilerin önceliklendirilmesi",
+  svc3_l3:"Şirkete özel iletişim, görüşme planlama ve yerel satış desteği",
+  svc3_l4:"CRM kaydı, pazar geri bildirimi ve fırsatların düzenli takibi",
+  svc4_h:"Yerel Pazar Temsili",
+  svc4_p:"Almanya'da ofis açmadan veya tam zamanlı yerel çalışan istihdam etmeden önce pazara giriş çalışmalarını sahada yürütmek isteyen üreticiler için esnek bir dış kaynak varlığı sağlarız.",
+  svc4_l1:"Kararlaştırılan ticari faaliyetler için Almanya'da yerel temas noktası",
+  svc4_l2:"Ürün bilgileri ve müşteri iletişiminin koordinasyonu",
+  svc4_l3:"Gerçek görüşmelerle doğrulanan pazar ve rekabet bilgisi",
+  svc4_l4:"Net sorumluluklarla esnek, sürekli destek ve raporlama",
   proc_eyebrow:"Süreç",
   proc_h2:"Araştırma başlangıçtır. Sonuç, sahadaki uygulamayla gelir.",
   proc_p:"Sürecin tamamını tek bir akışta yönetiriz: hedefleri belirler, karar vericilerle iletişime geçer, görüşmeleri planlar, müşterileri ziyaret eder, şirketinizi temsil eder ve tüm fırsatları takip ederiz.",
@@ -866,6 +937,10 @@ tr: {
   proc_s5:"Yüz Yüze Görüşme", proc_s5p:"Yetkinliklerinizi sunar, ihtiyacı ve ticari fırsatı doğrudan değerlendiririz.",
   proc_s6:"Yerel Temsil", proc_s6p:"Kararlaştırılan kapsam içinde ticari görüşmelerinize yerel destek sağlarız.",
   proc_s7:"Düzenli Takip", proc_s7p:"Geri bildirimleri kaydeder, sonraki adımları koordine eder ve sürecin ilerlemesini sağlarız.",
+  deliv_h:"Çalışma boyunca sunulan somut çıktılar",
+  deliv_p:"Kararları, sorumlulukları ve sonraki adımları görünür kılan pratik çalışma belgeleri alırsınız.",
+  deliv_1:"Önceliklendirilmiş hedef şirket listesi", deliv_2:"Görüşme hazırlık notu",
+  deliv_3:"Ziyaret veya fuar raporu", deliv_4:"Belgelenmiş pazar geri bildirimi", deliv_5:"Yapılandırılmış takip planı",
   who_eyebrow:"Kimlerle çalışıyoruz",
   who_h2:"Almanya pazarına girmek veya mevcut işlerini büyütmek isteyen, ihracata hazır Türk ve uluslararası üreticiler.",
   chip1:"İnşaat ve yapı malzemeleri", chip2:"Endüstriyel bileşenler", chip3:"Makine parçaları",
@@ -878,30 +953,52 @@ tr: {
   why_eyebrow:"Neden Germany Growth Desk?",
   why_h2:"Sahada kanıtlanmış ihracat ve satış deneyimine dayalı yerel destek.",
   why_role:"Kurucu · Germany Growth Desk, Berlin",
-  why_bio1:"Kaan, Berlin merkezli bir iş geliştirme ve ihracat satış profesyonelidir. Almanya pazarında bizzat satış geliştirmiş; 7 ayda 13 yeni kurumsal müşteri kazanmış ve endüstriyel B2B satışlarında yaklaşık 750.000 € ciro elde etmiştir. Bu sonuç, yüz yüze görüşmeler, müzakereler, profesyonel alıcı iletişimi ve disiplinli takip sayesinde elde edilmiştir.",
-  trmarket_eyebrow:"İkinci hizmet alanı",
-  trmarket_h2:"Alman şirketleri için Türkiye'de pazar geliştirme desteği.",
-  trmarket_p:"Önceliğimiz uluslararası üreticilerin Almanya pazarını geliştirmesidir. Bunun yanında, Türkiye'de müşteri, iş ortağı, distribütör veya tedarikçi arayan Alman B2B şirketlerine de destek veriyoruz. Bu hizmette de hedefli araştırma, yerel pazar bilgisi, doğrudan iletişim, iş görüşmeleri ve düzenli takip birlikte yürütülür.",
-  why_bio2:"Germany Growth Desk bugün uluslararası üreticiler için bu deneyimi sahaya taşır: müşterileri ziyaret eder, iş görüşmelerine ve fuarlara katılır, alıcılarla iletişimi yürütür ve her fırsatı düzenli bir satış süreci içinde ilerletir.",
+  why_bio1:"Kaan, Germany Growth Desk'i kurmadan önce Almanya pazarını geliştirmeye yönelik uygulamalı ihracat satış deneyimi kazandı. Önceki bir profesyonel görevinde, yedi ay içinde 13 yeni Alman şirket müşterisinin kazanılmasına yardımcı oldu ve endüstriyel B2B alanında yaklaşık 750.000 € ciroya katkı sağladı.",
+  why_bio2:"Bu deneyim; yüz yüze görüşmeler, müzakereler, profesyonel alıcı iletişimi ve disiplinli takip yoluyla kazanıldı. Germany Growth Desk bugün bu pratik yaklaşımı Almanya'daki uluslararası üreticileri desteklemek için kullanıyor.",
+  linkedin:"LinkedIn profili",
   d1b:"Berlin merkezli destek", d1s:"Toplantılarınız, fuarlarınız ve alıcı ziyaretleriniz için sahadayız.",
   d2b:"Alman ve Türk iş kültürlerine hâkimiyet", d2s:"Her iki pazardaki iş yapma biçimlerini yakından biliyor, üç dilde iletişim kuruyoruz.",
   d3b:"B2B satış ve profesyonel alıcı iletişimi", d3s:"Deneyimimiz teoriye değil; gerçek görüşmelere, müzakerelere ve kazanılmış müşterilere dayanır.",
   d4b:"Fuar desteği ve düzenli takip", d4s:"Her görüşmeyi kaydeder, sonraki adımları planlar ve süreci düzenli olarak takip ederiz.",
-  cta_eyebrow:"Sonraki adım",
-  cta_h2:"Almanya planlarınızı değerlendirmek için 20 dakikalık bir görüşme planlayın.",
-  cta_p:"Almanya'da planladığınız görüşmeyi, katılacağınız fuarı veya pazar geliştirme planınızı bize anlatın. Yerel saha desteğinin size nasıl katkı sağlayabileceğini değerlendirelim ve atılacak ilk somut adımı birlikte belirleyelim.",
-  cta_btn:"Görüşme planlayın",
-  cta_mail:'Veya doğrudan yazın: <a href="mailto:kaan@germanygrowthdesk.com">kaan@germanygrowthdesk.com</a>',
+  cta_eyebrow:"İletişim",
+  cta_h2:"Almanya pazarı planlarınızı bize anlatın.",
+  cta_p:"Hedeflerinizi, mevcut önceliklerinizi ve ihtiyaç duyduğunuz desteği paylaşın. Bilgileri inceleyerek size uygulanabilir bir sonraki adımla dönüş yapalım.",
+  cta_mail:'Veya doğrudan yazın: <a href="mailto:info@germanygrowthdesk.com">info@germanygrowthdesk.com</a>',
+  form_required_note:"* ile işaretlenen alanların doldurulması zorunludur.",
+  form_name:"Ad soyad", ph_name:"Adınız ve soyadınız",
+  form_company:"Şirket", ph_company:"Şirket adı",
+  form_email:"Kurumsal e-posta", ph_email:"ad@sirket.com",
+  form_website:"Web sitesi", ph_website:"https://sirket.com",
+  form_country:"Ülke", ph_country:"Faaliyet gösterdiğiniz ülke",
+  form_industry:"Ürün / sektör", ph_industry:"Ürünleriniz ve sektörünüz",
+  form_support:"İhtiyaç duyulan destek", opt_choose:"En uygun destek alanını seçin",
+  opt_visits:"Müşteri Ziyaretleri ve İş Görüşmeleri", opt_fairs:"Fuar Temsil Hizmeti",
+  opt_sales:"Satış Geliştirme ve Yeni Müşteri Kazanımı", opt_local:"Yerel Pazar Temsili", opt_other:"Diğer",
+  form_message:"Mesaj", ph_message:"İlgili bilgiler, zamanlama ve sorularınız",
+  form_consent:'<a href="privacy.html?lang=tr">Gizlilik Politikasını</a> okudum ve bu başvuruya yanıt verilmesi amacıyla bilgilerimin işlenmesine onay veriyorum. <span class="required-mark" aria-hidden="true">*</span>',
+  form_submit:"Talebi gönder", form_loading:"Gönderiliyor…",
+  form_success:"Teşekkür ederiz. Talebiniz başarıyla gönderildi.",
+  form_error:"Talebiniz gönderilemedi. Lütfen yeniden deneyin veya info@germanygrowthdesk.com adresine e-posta gönderin.",
+  form_invalid:"Lütfen işaretlenen alanları kontrol edin.",
+  error_required:"Lütfen bu zorunlu alanı doldurun.", error_email:"Lütfen geçerli bir kurumsal e-posta adresi girin.",
+  error_url:"Lütfen http:// veya https:// ile başlayan tam bir URL girin.", error_consent:"Devam etmek için Gizlilik Politikası onayını kabul edin.",
   legal_k:"Not",
   legal_p:"Germany Growth Desk ticari temsil ve iş geliştirme desteği sunar. Müşterinin ayrı bir yazılı yetkilendirmesi olmadıkça, müşteri adına hukuken bağlayıcı sözleşme imzalamaz.",
-  foot:"Uluslararası üreticiler için Almanya'da yerel iş geliştirme desteği"
+  foot:"Uluslararası üreticiler için Almanya'da yerel iş geliştirme desteği",
+  foot_privacy:"Gizlilik Politikası"
 }
 };
 
 
-function setLang(lang){
+const LANG_STORAGE_KEY = "ggd-language";
+const VALID_LANGS = ["en", "de", "tr"];
+const LANGUAGE_LABELS = {en:"Language selection",de:"Sprachauswahl",tr:"Dil seçimi"};
+let currentLang = "en";
+
+function setLang(lang, persist = true){
+  if(!VALID_LANGS.includes(lang)) lang = "en";
   const dict = I18N[lang];
-  if(!dict) return;
+  currentLang = lang;
   document.documentElement.lang = lang;
   document.title = dict._title;
   document.querySelector('meta[name="description"]').setAttribute('content', dict._description);
@@ -913,13 +1010,131 @@ function setLang(lang){
     const k = el.getAttribute('data-i18n-html');
     if(dict[k] !== undefined) el.innerHTML = dict[k];
   });
-  document.querySelectorAll('.langs button').forEach(b=>{
-    b.classList.toggle('active', b.getAttribute('data-lang')===lang);
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const k = el.getAttribute('data-i18n-placeholder');
+    if(dict[k] !== undefined) el.setAttribute('placeholder', dict[k]);
   });
+  document.querySelectorAll('.langs button').forEach(b=>{
+    const active = b.getAttribute('data-lang') === lang;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-pressed', String(active));
+  });
+  document.querySelector('.langs')?.setAttribute('aria-label', LANGUAGE_LABELS[lang]);
+  document.querySelectorAll('[data-legal-link="privacy"]').forEach(a=>a.href=`privacy.html?lang=${lang}`);
+  if(persist){
+    try{ localStorage.setItem(LANG_STORAGE_KEY, lang); }catch(_error){}
+  }
+  const pageUrl = new URL(window.location.href);
+  if(pageUrl.searchParams.has('lang')){
+    pageUrl.searchParams.set('lang', lang);
+    window.history.replaceState(null, '', pageUrl);
+  }
+  document.querySelectorAll('[aria-invalid="true"]').forEach(validateField);
+  const statusEl = document.getElementById('form-status');
+  if(statusEl?.dataset.state){ statusEl.textContent = dict[`form_${statusEl.dataset.state}`] || ''; }
+  const formButton = document.getElementById('form-submit');
+  if(formButton?.disabled){ formButton.textContent = dict.form_loading; }
 }
 document.querySelectorAll('.langs button').forEach(b=>{
   b.addEventListener('click', ()=> setLang(b.getAttribute('data-lang')));
 });
+
+function getInitialLang(){
+  const queryLang = new URLSearchParams(window.location.search).get('lang');
+  if(VALID_LANGS.includes(queryLang)) return queryLang;
+  try{
+    const stored = localStorage.getItem(LANG_STORAGE_KEY);
+    if(VALID_LANGS.includes(stored)) return stored;
+  }catch(_error){}
+  return "en";
+}
+
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+const submitButton = document.getElementById('form-submit');
+const formFields = [...contactForm.querySelectorAll('input:not([name="office_fax"]), select, textarea')];
+
+function fieldErrorElement(field){
+  return document.getElementById(`error-${field.id}`);
+}
+
+function validateField(field){
+  const dict = I18N[currentLang];
+  const value = field.type === 'checkbox' ? field.checked : field.value.trim();
+  let message = '';
+  if(field.required && !value){
+    message = field.type === 'checkbox' ? dict.error_consent : dict.error_required;
+  }else if(field.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)){
+    message = dict.error_email;
+  }else if(field.type === 'url' && value){
+    try{
+      const parsed = new URL(value);
+      if(!['http:','https:'].includes(parsed.protocol)) message = dict.error_url;
+    }catch(_error){ message = dict.error_url; }
+  }
+  const errorEl = fieldErrorElement(field);
+  field.setAttribute('aria-invalid', String(Boolean(message)));
+  if(errorEl){
+    errorEl.textContent = message;
+    errorEl.classList.toggle('visible', Boolean(message));
+  }
+  return !message;
+}
+
+formFields.forEach(field=>{
+  field.addEventListener('blur', ()=>validateField(field));
+  field.addEventListener(field.type === 'checkbox' || field.tagName === 'SELECT' ? 'change' : 'input', ()=>{
+    if(field.getAttribute('aria-invalid') === 'true') validateField(field);
+  });
+});
+
+contactForm.addEventListener('submit', async event=>{
+  event.preventDefault();
+  formStatus.className = 'form-status';
+  formStatus.textContent = '';
+  delete formStatus.dataset.state;
+  const valid = formFields.map(validateField).every(Boolean);
+  if(!valid){
+    formStatus.classList.add('error');
+    formStatus.dataset.state = 'invalid';
+    formStatus.textContent = I18N[currentLang].form_invalid;
+    formFields.find(field=>field.getAttribute('aria-invalid') === 'true')?.focus();
+    return;
+  }
+
+  submitButton.disabled = true;
+  submitButton.textContent = I18N[currentLang].form_loading;
+  const data = Object.fromEntries(new FormData(contactForm).entries());
+  data.privacyConsent = document.getElementById('privacy-consent').checked;
+  data.language = currentLang;
+
+  try{
+    const response = await fetch(contactForm.action, {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(data)
+    });
+    if(!response.ok) throw new Error('Submission failed');
+    contactForm.reset();
+    formFields.forEach(field=>{
+      field.setAttribute('aria-invalid','false');
+      const errorEl = fieldErrorElement(field);
+      if(errorEl){ errorEl.textContent=''; errorEl.classList.remove('visible'); }
+    });
+    formStatus.classList.add('success');
+    formStatus.dataset.state = 'success';
+    formStatus.textContent = I18N[currentLang].form_success;
+  }catch(_error){
+    formStatus.classList.add('error');
+    formStatus.dataset.state = 'error';
+    formStatus.textContent = I18N[currentLang].form_error;
+  }finally{
+    submitButton.disabled = false;
+    submitButton.textContent = I18N[currentLang].form_submit;
+  }
+});
+
+setLang(getInitialLang());
 
 const io = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
