@@ -1,5 +1,8 @@
 {
   "name": "germany-growth-desk-website",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env.local dev-server.mjs"
+  }
 }

@@ -1,6 +1,11 @@
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
 const RECIPIENT = 'info@germanygrowthdesk.com';
 const DEFAULT_SENDER = 'Germany Growth Desk Website <website@send.germanygrowthdesk.com>';
+const RATE_LIMIT_WINDOW_MS = 50 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+const RATE_LIMIT_MAX_BUCKETS = 10_000;
+const rateLimitBuckets = new Map();
+let lastRateLimitCleanup = 0;
 
 const SUPPORT_OPTIONS = new Set([
   'Customer Visits & Meetings',
@@ -14,8 +19,6 @@ const LIMITS = {
   name: 120,
   company: 160,
   email: 254,
-  website: 300,
-  country: 100,
   industry: 180,
   support: 80,
   message: 3000,
@@ -53,14 +56,53 @@ function isValidEmail(value) {
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-function isValidWebsite(value) {
-  if (!value) return true;
-  try {
-    const url = new URL(value);
-    return ['http:', 'https:'].includes(url.protocol);
-  } catch (_error) {
-    return false;
+function firstHeaderValue(value) {
+  const header = Array.isArray(value) ? value[0] : value;
+  return typeof header === 'string' ? header.split(',')[0].trim() : '';
+}
+
+function clientAddress(req) {
+  return firstHeaderValue(req.headers?.['x-vercel-forwarded-for']) ||
+    firstHeaderValue(req.headers?.['x-forwarded-for']) ||
+    req.socket?.remoteAddress ||
+    'unknown';
+}
+
+function cleanupRateLimitBuckets(now) {
+  if (now - lastRateLimitCleanup < RATE_LIMIT_WINDOW_MS && rateLimitBuckets.size < RATE_LIMIT_MAX_BUCKETS) return;
+
+  for (const [key, bucket] of rateLimitBuckets) {
+    if (bucket.resetAt <= now) rateLimitBuckets.delete(key);
   }
+
+  while (rateLimitBuckets.size >= RATE_LIMIT_MAX_BUCKETS) {
+    rateLimitBuckets.delete(rateLimitBuckets.keys().next().value);
+  }
+  lastRateLimitCleanup = now;
+}
+
+function checkRateLimit(req) {
+  const now = Date.now();
+  cleanupRateLimitBuckets(now);
+  const key = clientAddress(req);
+  let bucket = rateLimitBuckets.get(key);
+
+  if (!bucket || bucket.resetAt <= now) {
+    bucket = { count: 0, resetAt: now + RATE_LIMIT_WINDOW_MS };
+    rateLimitBuckets.set(key, bucket);
+  }
+
+  const resetSeconds = Math.max(1, Math.ceil((bucket.resetAt - now) / 1000));
+  if (bucket.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return { allowed: false, remaining: 0, resetSeconds };
+  }
+
+  bucket.count += 1;
+  return {
+    allowed: true,
+    remaining: RATE_LIMIT_MAX_REQUESTS - bucket.count,
+    resetSeconds
+  };
 }
 
 export default async function handler(req, res) {
@@ -85,22 +127,27 @@ export default async function handler(req, res) {
     return sendJson(res, 200, { ok: true });
   }
 
+  const rateLimit = checkRateLimit(req);
+  res.setHeader('X-RateLimit-Limit', String(RATE_LIMIT_MAX_REQUESTS));
+  res.setHeader('X-RateLimit-Remaining', String(rateLimit.remaining));
+  if (!rateLimit.allowed) {
+    res.setHeader('Retry-After', String(rateLimit.resetSeconds));
+    return sendJson(res, 429, { ok: false, error: 'rate_limited' });
+  }
+
   const submission = {
     name: clean(body, 'name'),
     company: clean(body, 'company'),
     email: clean(body, 'email'),
-    website: clean(body, 'website'),
-    country: clean(body, 'country'),
     industry: clean(body, 'industry'),
     support: clean(body, 'support'),
     message: clean(body, 'message'),
     language: clean(body, 'language') || 'en'
   };
 
-  const required = ['name', 'company', 'email', 'country', 'industry', 'support', 'message'];
+  const required = ['name', 'company', 'email', 'industry', 'support', 'message'];
   const invalid = required.some(key => !submission[key]) ||
     !isValidEmail(submission.email) ||
-    !isValidWebsite(submission.website) ||
     !SUPPORT_OPTIONS.has(submission.support) ||
     body.privacyConsent !== true ||
     !['en', 'de', 'tr'].includes(submission.language);
@@ -120,8 +167,6 @@ export default async function handler(req, res) {
     `Name: ${submission.name}`,
     `Company: ${submission.company}`,
     `Business email: ${submission.email}`,
-    `Website: ${submission.website || 'Not provided'}`,
-    `Country: ${submission.country}`,
     `Product / industry: ${submission.industry}`,
     `Required support: ${submission.support}`,
     `Selected website language: ${submission.language.toUpperCase()}`,
