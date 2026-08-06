@@ -2,7 +2,7 @@ import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import contactHandler from './api/contact.js';
+import { onRequest as contactFunction } from './functions/api/contact.js';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const HOST = '127.0.0.1';
@@ -79,14 +79,59 @@ async function serveStatic(req, res, url) {
   }
 }
 
+function requestHeaders(req) {
+  const headers = new Headers();
+  const skippedHeaders = new Set(['connection', 'host', 'transfer-encoding']);
+  for (const [name, value] of Object.entries(req.headers)) {
+    if (skippedHeaders.has(name) || value === undefined) continue;
+    if (Array.isArray(value)) value.forEach(item => headers.append(name, item));
+    else headers.set(name, value);
+  }
+  if (!headers.has('CF-Connecting-IP')) {
+    headers.set('CF-Connecting-IP', req.socket?.remoteAddress || '127.0.0.1');
+  }
+  return headers;
+}
+
+async function serveContact(req, res, url) {
+  const rawBody = await readRequestBody(req, res);
+  if (rawBody === null) return;
+
+  const request = new Request(url, {
+    method: req.method,
+    headers: requestHeaders(req),
+    ...(['GET', 'HEAD'].includes(req.method) ? {} : { body: rawBody })
+  });
+
+  const response = await contactFunction({
+    request,
+    env: { RESEND_API_KEY: process.env.RESEND_API_KEY }
+  });
+  const responseBody = Buffer.from(await response.arrayBuffer());
+
+  res.statusCode = response.status;
+  response.headers.forEach((value, name) => res.setHeader(name, value));
+  res.setHeader('Content-Length', responseBody.length);
+  res.end(responseBody);
+}
+
 const server = createServer(async (req, res) => {
   const url = new URL(req.url || '/', `http://${req.headers.host || `${HOST}:${PORT}`}`);
 
   if (url.pathname === '/api/contact') {
-    const rawBody = await readRequestBody(req, res);
-    if (rawBody === null) return;
-    req.body = rawBody;
-    return contactHandler(req, res);
+    try {
+      return await serveContact(req, res, url);
+    } catch (error) {
+      console.error('Contact function error:', error?.message || 'unknown error');
+      res.statusCode = 500;
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      res.setHeader('Cache-Control', 'no-store');
+      return res.end(JSON.stringify({
+        success: false,
+        code: 'SERVICE_UNAVAILABLE',
+        message: 'The enquiry service is temporarily unavailable.'
+      }));
+    }
   }
 
   return serveStatic(req, res, url);
@@ -96,4 +141,3 @@ server.listen(PORT, HOST, () => {
   const emailStatus = process.env.RESEND_API_KEY ? 'email enabled' : 'email disabled: RESEND_API_KEY is not set';
   console.log(`Germany Growth Desk dev server: http://${HOST}:${PORT} (${emailStatus})`);
 });
-
