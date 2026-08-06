@@ -1130,14 +1130,24 @@ contactForm.addEventListener('submit', async event=>{
   data.language = currentLang;
 
   try{
-    const response = await fetch(contactForm.action, {
+    const endpoint = contactForm.getAttribute('action') || '/api/contact';
+    const response = await fetch(endpoint, {
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify(data)
     });
-    if(!response.ok){
-      const result = await response.json().catch(()=>({}));
-      throw new Error(result.error || 'submission_failed');
+    const result = await response.json().catch(()=>({}));
+    if(!response.ok || result.success !== true){
+      const safeCode = typeof result.code === 'string' ? result.code : 'SUBMISSION_FAILED';
+      const safeMessage = typeof result.message === 'string' ? result.message : 'The request failed.';
+      console.error('Contact form request failed.', {
+        status:response.status,
+        code:safeCode,
+        message:safeMessage
+      });
+      const requestError = new Error(safeCode);
+      requestError.safeCode = safeCode;
+      throw requestError;
     }
     contactForm.reset();
     formFields.forEach(field=>{
@@ -1149,9 +1159,16 @@ contactForm.addEventListener('submit', async event=>{
     formStatus.dataset.state = 'success';
     formStatus.textContent = I18N[currentLang].form_success;
   }catch(error){
+    if(!error.safeCode){
+      console.error('Contact form request failed.', {
+        status:0,
+        code:'NETWORK_ERROR',
+        message:'The contact endpoint could not be reached.'
+      });
+    }
     formStatus.classList.add('error');
     formStatus.dataset.state = 'error';
-    formStatus.textContent = error.message === 'rate_limited' ? I18N[currentLang].form_rate_limited : I18N[currentLang].form_error;
+    formStatus.textContent = error.safeCode === 'RATE_LIMITED' ? I18N[currentLang].form_rate_limited : I18N[currentLang].form_error;
   }finally{
     submitButton.disabled = false;
     submitButton.textContent = I18N[currentLang].form_submit;

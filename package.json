@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node --env-file-if-exists=.env.local dev-server.mjs"
+    "dev": "node --env-file-if-exists=.env.local dev-server.mjs",
+    "dev:cloudflare": "npx wrangler pages dev . --port 8788 --compatibility-date=2026-08-06"
   }
 }
